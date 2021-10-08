@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_modular/flutter_modular.dart';
 
 class RestoreFourScreen extends StatefulWidget {
   @override
@@ -6,6 +7,8 @@ class RestoreFourScreen extends StatefulWidget {
 }
 
 class RestoreFourScreenState extends State<RestoreFourScreen> {
+  bool isFlag = false;
+
   @override
   dispose() {
     super.dispose();
@@ -69,7 +72,8 @@ class RestoreFourScreenState extends State<RestoreFourScreen> {
                     SizedBox(
                       height: 61,
                     ),
-                    Container(
+                    !isFlag
+                        ? Container(
                       width: 50,
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -108,23 +112,35 @@ class RestoreFourScreenState extends State<RestoreFourScreen> {
                           )
                         ],
                       ),
-                    ),
+                    )
+                        : Container(),
                     SizedBox(
                       height: 16,
                     ),
-                    Container(
-                      width: 339,
-                      height: 56,
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(10),
-                        color: Color(0xFF7494F6),
+                    GestureDetector(
+                      onTap: () {
+                        if (!isFlag) {
+                          setState(() {
+                            isFlag = true;
+                          });
+                        } else {
+                          Modular.to.pushNamed('/home');
+                        }
+                      },
+                      child: Container(
+                        width: 339,
+                        height: 56,
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(10),
+                          color: Color(0xFF7494F6),
+                        ),
+                        child: Center(
+                            child: Text(!isFlag ? 'Next' : 'Continue',
+                                style: TextStyle(
+                                    color: Color(0xFFFFFFFF),
+                                    fontSize: 18,
+                                    fontWeight: FontWeight.normal))),
                       ),
-                      child: Center(
-                          child: Text('Next',
-                              style: TextStyle(
-                                  color: Color(0xFFFFFFFF),
-                                  fontSize: 18,
-                                  fontWeight: FontWeight.normal))),
                     ),
                     SizedBox(
                       height: 20,

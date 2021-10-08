@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_modular/flutter_modular.dart';
 
 class RestoreThreeScreen extends StatefulWidget {
   @override
@@ -105,19 +106,22 @@ class RestoreThreeScreenState extends State<RestoreThreeScreen> {
                 SizedBox(
                   height: 16,
                 ),
-                Container(
-                  width: 339,
-                  height: 56,
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(10),
-                    color: Color(0xFF7494F6),
+                GestureDetector(
+                  onTap: ()=> Modular.to.pushNamed('/restore-four'),
+                  child: Container(
+                    width: 339,
+                    height: 56,
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(10),
+                      color: Color(0xFF7494F6),
+                    ),
+                    child: Center(
+                        child: Text('Next',
+                            style: TextStyle(
+                                color: Color(0xFFFFFFFF),
+                                fontSize: 18,
+                                fontWeight: FontWeight.normal))),
                   ),
-                  child: Center(
-                      child: Text('Next',
-                          style: TextStyle(
-                              color: Color(0xFFFFFFFF),
-                              fontSize: 18,
-                              fontWeight: FontWeight.normal))),
                 ),
                 SizedBox(
                   height: 20,

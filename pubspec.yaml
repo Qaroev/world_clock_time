@@ -26,6 +26,8 @@ dependencies:
   flutter_modular: ^3.0.1
   shared_preferences: ^2.0.6
   rate_my_app: ^1.1.1
+  device_preview: ^0.7.4
+  responsive_framework: ^0.1.4
 
 
   # The following adds the Cupertino Icons font to your application.

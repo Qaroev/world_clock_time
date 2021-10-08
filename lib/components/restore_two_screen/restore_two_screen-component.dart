@@ -10,6 +10,8 @@ class RestoreTwoScreen extends StatefulWidget {
 }
 
 class RestoreTwoScreenState extends State<RestoreTwoScreen> {
+  bool isFlag = false;
+
   @override
   dispose() {
     super.dispose();
@@ -304,7 +306,16 @@ class RestoreTwoScreenState extends State<RestoreTwoScreen> {
                   height: 16,
                 ),
                 GestureDetector(
-                  onTap: () => open(),
+                  onTap: () {
+                    if (!isFlag) {
+                      open();
+                      setState(() {
+                        isFlag = true;
+                      });
+                    } else {
+                       Modular.to.pushNamed('/restore-three');
+                    }
+                  },
                   child: Container(
                     width: 339,
                     height: 56,
@@ -313,7 +324,7 @@ class RestoreTwoScreenState extends State<RestoreTwoScreen> {
                       color: Color(0xFF7494F6),
                     ),
                     child: Center(
-                        child: Text('Continue',
+                        child: Text(isFlag ? 'Next' : 'Continue',
                             style: TextStyle(
                                 color: Color(0xFFFFFFFF),
                                 fontSize: 18,

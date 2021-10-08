@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_modular/flutter_modular.dart';
 
 class SplashScreen extends StatefulWidget {
   @override
@@ -8,17 +9,14 @@ class SplashScreen extends StatefulWidget {
 }
 
 class SplashScreenState extends State<SplashScreen> {
-
-
-
   startTime() async {
     var _duration = new Duration(seconds: 3);
     return new Timer(_duration, navigationPage);
   }
 
   void navigationPage() {
+    Modular.to.pushNamed('/restore');
   }
-
 
   @override
   dispose() {
@@ -35,7 +33,7 @@ class SplashScreenState extends State<SplashScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color(0xFFE5E5E5),
+      backgroundColor: Color(0xFFFFFFFF),
       body: Center(
         child: Column(
           mainAxisSize: MainAxisSize.min,
