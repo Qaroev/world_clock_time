@@ -37,12 +37,15 @@ class _AddScreenState extends State<AddScreen> {
                       fontWeight: FontWeight.normal,
                     ),
                   ),
-                  Text(
-                    'Add',
-                    style: TextStyle(
-                      color: Color(0xFF007AFF),
-                      fontSize: 17,
-                      fontWeight: FontWeight.normal,
+                  GestureDetector(
+                    onTap: () => Modular.to.pushNamed('/save-screen'),
+                    child: Text(
+                      'Add',
+                      style: TextStyle(
+                        color: Color(0xFF007AFF),
+                        fontSize: 17,
+                        fontWeight: FontWeight.normal,
+                      ),
                     ),
                   ),
                 ],

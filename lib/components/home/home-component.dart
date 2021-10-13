@@ -20,9 +20,12 @@ class _HomeComponentState extends State<HomeComponent> {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Icon(
-                      Icons.settings,
-                      color: Color(0xFF7494F6),
+                    GestureDetector(
+                      onTap: ()=>Modular.to.pushNamed('/settings-screen'),
+                      child: Icon(
+                        Icons.settings,
+                        color: Color(0xFF7494F6),
+                      ),
                     ),
                     Text(
                       'World Clock',
