@@ -140,20 +140,23 @@ class _SaveScreenState extends State<SaveScreen> {
                   )
                 ],
               ),
-              GestureDetector(
-                onTap: () => Modular.to.pushNamed('/restore-two'),
-                child: Container(
-                  height: 56,
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(10),
-                    color: Color(0xFF7494F6),
+              Padding(
+                padding: const EdgeInsets.only(bottom: 15.0),
+                child: GestureDetector(
+                  onTap: () => Modular.to.pushNamed('/restore-two'),
+                  child: Container(
+                    height: 56,
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(10),
+                      color: Color(0xFF7494F6),
+                    ),
+                    child: Center(
+                        child: Text('Save',
+                            style: TextStyle(
+                                color: Color(0xFFFFFFFF),
+                                fontSize: 18,
+                                fontWeight: FontWeight.normal))),
                   ),
-                  child: Center(
-                      child: Text('Save',
-                          style: TextStyle(
-                              color: Color(0xFFFFFFFF),
-                              fontSize: 18,
-                              fontWeight: FontWeight.normal))),
                 ),
               ),
             ],

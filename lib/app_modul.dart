@@ -6,6 +6,7 @@ import 'package:worldclocktime/components/restore_two_screen/restore_two_screen-
 import 'package:worldclocktime/components/save_screen/save_screen-module.dart';
 import 'package:worldclocktime/components/settings_screen/settings_screen-module.dart';
 import 'package:worldclocktime/components/splash_screen/splash_screen-module.dart';
+import 'package:worldclocktime/components/themes_screen/themes_screen-module.dart';
 
 import 'components/restore_four_screen/restore_four_screen-module.dart';
 import 'components/restore_three_screen/restore_three_screen-module.dart';
@@ -55,6 +56,10 @@ class AppModule extends Module {
     ModuleRoute(
       '/settings-screen',
       module: SettingsScreenModule(),
+    ),
+    ModuleRoute(
+      '/themes-screen',
+      module: ThemesScreenModule(),
     ),
   ];
 }
