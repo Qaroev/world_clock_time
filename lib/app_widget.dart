@@ -38,7 +38,6 @@ class AppWidgetState extends State<AppWidget> {
               ResponsiveBreakpoint.autoScale(2460, name: "4K"),
             ],
             background: Container(color: Color(0xFFF5F5F5)));
-        widget = DevicePreview.appBuilder(context, widget);
         return widget;
       },
       initialRoute: '/splash',

@@ -7,13 +7,16 @@ import 'package:worldclocktime/components/save_screen/save_screen-module.dart';
 import 'package:worldclocktime/components/settings_screen/settings_screen-module.dart';
 import 'package:worldclocktime/components/splash_screen/splash_screen-module.dart';
 import 'package:worldclocktime/components/themes_screen/themes_screen-module.dart';
+import 'package:worldclocktime/services/main-service.dart';
 
 import 'components/restore_four_screen/restore_four_screen-module.dart';
 import 'components/restore_three_screen/restore_three_screen-module.dart';
 
 class AppModule extends Module {
   @override
-  final List<Bind> binds = [];
+  final List<Bind> binds = [
+    $MainService
+  ];
 
   @override
   final List<ModularRoute> routes = [
