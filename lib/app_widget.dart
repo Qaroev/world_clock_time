@@ -23,7 +23,7 @@ class AppWidgetState extends State<AppWidget> {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      theme: ThemeData(fontFamily: 'SF Pro Display'),
+      themeMode: ThemeMode.dark,
       builder: (context, widget) {
         widget = ResponsiveWrapper.builder(
             BouncingScrollWrapper.builder(context, widget!),

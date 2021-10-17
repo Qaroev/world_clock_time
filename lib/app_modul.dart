@@ -8,6 +8,7 @@ import 'package:worldclocktime/components/settings_screen/settings_screen-module
 import 'package:worldclocktime/components/splash_screen/splash_screen-module.dart';
 import 'package:worldclocktime/components/themes_screen/themes_screen-module.dart';
 import 'package:worldclocktime/services/main-service.dart';
+import 'package:worldclocktime/services/token/token_service.dart';
 
 import 'components/restore_four_screen/restore_four_screen-module.dart';
 import 'components/restore_three_screen/restore_three_screen-module.dart';
@@ -15,7 +16,8 @@ import 'components/restore_three_screen/restore_three_screen-module.dart';
 class AppModule extends Module {
   @override
   final List<Bind> binds = [
-    $MainService
+    $MainService,
+    $TokenService
   ];
 
   @override

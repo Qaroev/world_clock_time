@@ -13,6 +13,7 @@ class _AddScreenState extends State<AddScreen> {
   var listItem;
   var _searchResult = [];
   var feature;
+  int indexItem = -1;
 
   @override
   void initState() {
@@ -104,73 +105,95 @@ class _AddScreenState extends State<AddScreen> {
                         return Text('Error: ${snapshot.error}');
                       else
                         listItem = snapshot.data;
-                        return SingleChildScrollView(
-                          child: Container(
-                            height: MediaQuery.of(context).size.height - 120,
-                            padding: EdgeInsets.only(left: 10, right: 10),
-                            color: Color(0xFFEAEAEA),
-                            child: _searchResult.length == 0 ||
-                                    controller.text.isEmpty
-                                ? ListView(
-                                    shrinkWrap: true,
-                                    scrollDirection: Axis.vertical,
-                                    children: [
-                                      ...listItem.map((item) {
-                                        return Container(
+                      return SingleChildScrollView(
+                        child: Container(
+                          height: MediaQuery.of(context).size.height - 120,
+                          padding: EdgeInsets.only(left: 10, right: 10),
+                          color: Color(0xFFEAEAEA),
+                          child: _searchResult.length == 0 ||
+                                  controller.text.isEmpty
+                              ? ListView(
+                                  shrinkWrap: true,
+                                  scrollDirection: Axis.vertical,
+                                  children: [
+                                    ...listItem.map((item) {
+                                      return GestureDetector(
+                                        onTap: () {
+                                          indexItem = listItem.indexOf(item);
+                                          _mainService.mainModel!.name = item;
+                                          setState(() {});
+                                        },
+                                        child: Container(
                                           padding: EdgeInsets.only(top: 10),
-                                          height: 45,
+                                          height: 50,
                                           child: Column(
                                             crossAxisAlignment:
                                                 CrossAxisAlignment.start,
                                             children: [
-                                              Text(
-                                                '$item',
-                                                style: TextStyle(
-                                                    color: Colors.black,
-                                                    fontSize: 14,
-                                                    fontWeight:
-                                                        FontWeight.normal),
+                                              Row(
+                                                mainAxisAlignment:
+                                                    MainAxisAlignment
+                                                        .spaceBetween,
+                                                children: [
+                                                  Text(
+                                                    '$item',
+                                                    style: TextStyle(
+                                                        color: Colors.black,
+                                                        fontSize: 14,
+                                                        fontWeight:
+                                                            FontWeight.normal),
+                                                  ),
+                                                  indexItem ==
+                                                          listItem.indexOf(item)
+                                                      ? Icon(
+                                                          Icons.check,
+                                                          color:
+                                                              Color(0xFF7494F6),
+                                                        )
+                                                      : Container()
+                                                ],
                                               ),
                                               Divider(
                                                 thickness: 2,
                                               ),
                                             ],
                                           ),
-                                        );
-                                      })
-                                    ],
-                                  )
-                                : ListView(
-                                    shrinkWrap: true,
-                                    scrollDirection: Axis.vertical,
-                                    children: [
-                                      ..._searchResult.map((item) {
-                                        return Container(
-                                          padding: EdgeInsets.only(top: 10),
-                                          height: 45,
-                                          child: Column(
-                                            crossAxisAlignment:
-                                                CrossAxisAlignment.start,
-                                            children: [
-                                              Text(
-                                                '$item',
-                                                style: TextStyle(
-                                                    color: Colors.black,
-                                                    fontSize: 14,
-                                                    fontWeight:
-                                                        FontWeight.normal),
-                                              ),
-                                              Divider(
-                                                thickness: 2,
-                                              ),
-                                            ],
-                                          ),
-                                        );
-                                      })
-                                    ],
-                                  ),
-                          ),
-                        );
+                                        ),
+                                      );
+                                    })
+                                  ],
+                                )
+                              : ListView(
+                                  shrinkWrap: true,
+                                  scrollDirection: Axis.vertical,
+                                  children: [
+                                    ..._searchResult.map((item) {
+                                      return Container(
+                                        padding: EdgeInsets.only(top: 10),
+                                        height: 45,
+                                        child: Column(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                          children: [
+                                            Text(
+                                              '$item',
+                                              style: TextStyle(
+                                                  color: Colors.black,
+                                                  fontSize: 14,
+                                                  fontWeight:
+                                                      FontWeight.normal),
+                                            ),
+                                            Divider(
+                                              thickness: 2,
+                                            ),
+                                          ],
+                                        ),
+                                      );
+                                    })
+                                  ],
+                                ),
+                        ),
+                      );
                   }
                 },
               )

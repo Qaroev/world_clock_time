@@ -10,7 +10,6 @@ class ThemesScreen extends StatefulWidget {
 
 class ThemesScreenState extends State<ThemesScreen> {
 
-
   @override
   dispose() {
     super.dispose();
@@ -72,7 +71,23 @@ class ThemesScreenState extends State<ThemesScreen> {
                         fontWeight: FontWeight.bold,
                       ),
                     ),
-                    trailing: Icon(Icons.arrow_forward_ios),
+                    trailing: Container(
+                      width: 25,
+                      height: 25,
+                      decoration: BoxDecoration(
+                        color: Colors.white,
+                      ),
+                      child: Checkbox(
+                        value: true,
+                        activeColor: Colors.white,
+                        checkColor: Color(0xFF7494F6),
+                        onChanged: (bool? value) {
+//                         setState(() {
+//                           this.value = value;
+//                         });
+                        },
+                      ),
+                    ),
                   ),
                 ),
               ),
@@ -84,7 +99,7 @@ class ThemesScreenState extends State<ThemesScreen> {
                 ),
                 child: ListTile(
                   contentPadding:
-                  EdgeInsets.only(top: 20, bottom: 20, left: 15, right: 15),
+                      EdgeInsets.only(top: 20, bottom: 20, left: 15, right: 15),
                   minVerticalPadding: 0,
                   dense: true,
                   title: Text(
@@ -95,7 +110,23 @@ class ThemesScreenState extends State<ThemesScreen> {
                       fontWeight: FontWeight.bold,
                     ),
                   ),
-                  trailing: Icon(Icons.arrow_forward_ios),
+                  trailing: Container(
+                    width: 25,
+                    height: 25,
+                    decoration: BoxDecoration(
+                      color: Colors.white,
+                    ),
+                    child: Checkbox(
+                      value: true,
+                      activeColor: Colors.white,
+                      checkColor: Color(0xFF7494F6),
+                      onChanged: (bool? value) {
+//                         setState(() {
+//                           this.value = value;
+//                         });
+                      },
+                    ),
+                  ),
                 ),
               ),
               SizedBox(height: 20),
@@ -106,7 +137,7 @@ class ThemesScreenState extends State<ThemesScreen> {
                 ),
                 child: ListTile(
                   contentPadding:
-                  EdgeInsets.only(top: 20, bottom: 20, left: 15, right: 15),
+                      EdgeInsets.only(top: 20, bottom: 20, left: 15, right: 15),
                   minVerticalPadding: 0,
                   dense: true,
                   title: Text(
@@ -117,7 +148,24 @@ class ThemesScreenState extends State<ThemesScreen> {
                       fontWeight: FontWeight.bold,
                     ),
                   ),
-                  trailing: Icon(Icons.arrow_forward_ios),
+                  trailing: Container(
+                    width: 25,
+                    height: 25,
+                    decoration: BoxDecoration(
+                      color: Colors.white,
+                    ),
+                    child: Checkbox(
+                      value: false,
+                      side: BorderSide.none,
+                      activeColor: Colors.white,
+                      checkColor: Color(0xFF7494F6),
+                      onChanged: (bool? value) {
+//                         setState(() {
+//                           this.value = value;
+//                         });
+                      },
+                    ),
+                  ),
                 ),
               ),
               SizedBox(height: 20),
@@ -128,7 +176,7 @@ class ThemesScreenState extends State<ThemesScreen> {
                 ),
                 child: ListTile(
                   contentPadding:
-                  EdgeInsets.only(top: 20, bottom: 20, left: 15, right: 15),
+                      EdgeInsets.only(top: 20, bottom: 20, left: 15, right: 15),
                   minVerticalPadding: 0,
                   dense: true,
                   title: Text(
@@ -140,19 +188,21 @@ class ThemesScreenState extends State<ThemesScreen> {
                     ),
                   ),
                   trailing: Container(
-                    width: 18,
-                    height: 18,
+                    width: 25,
+                    height: 25,
                     decoration: BoxDecoration(
                       color: Colors.white,
                     ),
-                     child: Checkbox(
-                       value: true,
-                       onChanged: (bool? value) {
+                    child: Checkbox(
+                      value: true,
+                      activeColor: Colors.white,
+                      checkColor: Color(0xFF7494F6),
+                      onChanged: (bool? value) {
 //                         setState(() {
 //                           this.value = value;
 //                         });
-                       },
-                     ),
+                      },
+                    ),
                   ),
                 ),
               ),
@@ -164,7 +214,7 @@ class ThemesScreenState extends State<ThemesScreen> {
                 ),
                 child: ListTile(
                   contentPadding:
-                  EdgeInsets.only(top: 20, bottom: 20, left: 15, right: 15),
+                      EdgeInsets.only(top: 20, bottom: 20, left: 15, right: 15),
                   minVerticalPadding: 0,
                   dense: true,
                   title: Text(
@@ -175,7 +225,23 @@ class ThemesScreenState extends State<ThemesScreen> {
                       fontWeight: FontWeight.bold,
                     ),
                   ),
-                  trailing: Icon(Icons.arrow_forward_ios),
+                  trailing: Container(
+                    width: 25,
+                    height: 25,
+                    decoration: BoxDecoration(
+                      color: Colors.white,
+                    ),
+                    child: Checkbox(
+                      value: true,
+                      activeColor: Colors.white,
+                      checkColor: Color(0xFF7494F6),
+                      onChanged: (bool? value) {
+//                         setState(() {
+//                           this.value = value;
+//                         });
+                      },
+                    ),
+                  ),
                 ),
               ),
               SizedBox(height: 20),
