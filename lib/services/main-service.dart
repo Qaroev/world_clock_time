@@ -23,19 +23,26 @@ class MainService extends Disposable {
     }
   }
 
-  saveData(){
+  Future<dynamic> getTimeZone(String country) async {
+    http.Response res = await http
+        .get(Uri.parse('http://worldtimeapi.org/api/timezone/$country'));
+    if (res.statusCode == 200 || res.statusCode == 400) {
+      return jsonDecode(res.body);
+    } else {
+      throw Exception('Failed to load data!');
+    }
+  }
+
+  saveData() {
     _tokenService.getData('controlStudentsData').then((value) {
       if (value != null) {
-        final List<MainModel> _mainItem =
-        MainModel.decode(value);
+        final List<MainModel> _mainItem = MainModel.decode(value);
         _mainItem.add(mainModel!);
-        final String __mainItemData =
-        MainModel.encode(_mainItem);
+        final String __mainItemData = MainModel.encode(_mainItem);
         _tokenService.saveData("controlStudentsData", __mainItemData);
         print('saveshud');
       } else {
-        final String __mainItemData =
-        MainModel.encode([mainModel!]);
+        final String __mainItemData = MainModel.encode([mainModel!]);
         _tokenService.saveData("controlStudentsData", __mainItemData);
         print('saveshud');
       }

@@ -34,7 +34,6 @@ class _HomeComponentState extends State<HomeComponent> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.black38,
       body: SafeArea(
         child: SingleChildScrollView(
           child: Container(
@@ -129,8 +128,9 @@ class _HomeComponentState extends State<HomeComponent> {
                             fontWeight: FontWeight.bold,
                           ),
                         ),
+                        SizedBox(height: 10),
                         Text(
-                          'Today',
+                          '${element.utcOffset}',
                           style: TextStyle(
                             color: Color(0xFFC4C4C4),
                             fontSize: 14,
@@ -144,7 +144,7 @@ class _HomeComponentState extends State<HomeComponent> {
                 trailing: Container(
                   padding: const EdgeInsets.only(right: 20, top: 13),
                   child: Text(
-                    '23:13',
+                    '${element.time}',
                     style: TextStyle(
                       color: Colors.black,
                       fontSize: 30,

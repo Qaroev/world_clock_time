@@ -370,7 +370,8 @@ class _SaveScreenState extends State<SaveScreen> {
                 padding: const EdgeInsets.only(bottom: 15.0),
                 child: GestureDetector(
                   onTap: _mainService.mainModel!.cardName != null &&
-                          _controller.text != ''
+                          _controller.text != '' &&
+                          indexItem != -1
                       ? () {
                           _mainService.saveData();
                           Modular.to.pushNamed('/home');
@@ -381,7 +382,8 @@ class _SaveScreenState extends State<SaveScreen> {
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(10),
                       color: _mainService.mainModel!.cardName != null &&
-                              _controller.text != ''
+                              _controller.text != ''&&
+                          indexItem != -1
                           ? Color(0xFF7494F6)
                           : Color.fromRGBO(116, 148, 246, 0.3),
                     ),

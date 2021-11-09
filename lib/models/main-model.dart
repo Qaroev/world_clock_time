@@ -1,15 +1,17 @@
 import 'dart:convert';
 
-class MainModel{
+class MainModel {
   String? name;
   String? cardName;
   String? time;
+  String? utcOffset;
   String? color;
-  
+
   MainModel({
     this.name,
     this.cardName,
     this.time,
+    this.utcOffset,
     this.color,
   });
 
@@ -18,7 +20,8 @@ class MainModel{
       name: json["name"] != null ? json["name"] : "",
       cardName: json["cardName"] != null ? json["cardName"] : "",
       time: json["time"] != null ? json["time"] : "",
-      color: json["color"] != null ? json["color"] : 0x0000000,
+      utcOffset: json["utcOffset"] != null ? json["utcOffset"] : "",
+      color: json["color"] != null ? json["color"] : '0x0000000',
     );
   }
 
@@ -27,20 +30,21 @@ class MainModel{
       'name': name!.trim(),
       'cardName': cardName!.trim(),
       'time': time!.trim(),
+      'utcOffset': utcOffset!.trim(),
       'color': time!,
     };
     return map;
   }
 
   static Map<String, dynamic> toMap(MainModel? mainModel) => {
-    'login': mainModel!.name,
-    'cardName': mainModel.cardName,
-    'time': mainModel.time,
-    'color': mainModel.color,
-  };
+        'login': mainModel!.name,
+        'cardName': mainModel.cardName,
+        'time': mainModel.time,
+        'utcOffset': mainModel.utcOffset,
+        'color': mainModel.color,
+      };
 
-  static String encode(List<MainModel> mainModel) =>
-      json.encode(
+  static String encode(List<MainModel> mainModel) => json.encode(
         mainModel
             .map<Map<String, dynamic>>((res) => MainModel.toMap(res))
             .toList(),
@@ -52,7 +56,7 @@ class MainModel{
           .toList();
 }
 
-class Themes{
+class Themes {
   String? name;
   int? color;
   int? isCheck;

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
+import 'package:intl/intl.dart';
 import 'package:worldclocktime/services/main-service.dart';
 
 class AddScreen extends StatefulWidget {
@@ -10,7 +11,7 @@ class AddScreen extends StatefulWidget {
 class _AddScreenState extends State<AddScreen> {
   MainService _mainService = Modular.get<MainService>();
   TextEditingController controller = new TextEditingController();
-  var listItem;
+  List<dynamic>? listItem;
   var _searchResult = [];
   var feature;
   int indexItem = -1;
@@ -116,11 +117,22 @@ class _AddScreenState extends State<AddScreen> {
                                   shrinkWrap: true,
                                   scrollDirection: Axis.vertical,
                                   children: [
-                                    ...listItem.map((item) {
-                                      return GestureDetector(
+                                    ...listItem!.map((item) {
+                                      return InkWell(
                                         onTap: () {
-                                          indexItem = listItem.indexOf(item);
+                                          showLoaderDialog(context);
+                                          indexItem = listItem!.indexOf(item);
                                           _mainService.mainModel!.name = item;
+                                          _mainService
+                                              .getTimeZone(item)
+                                              .then((value) {
+                                            Modular.to.pop();
+                                            _mainService.mainModel!.utcOffset =
+                                                value['utc_offset'];
+                                            _mainService.mainModel!.time =
+                                                getTime(value['datetime']);
+                                            setState(() {});
+                                          });
                                           setState(() {});
                                         },
                                         child: Container(
@@ -144,7 +156,8 @@ class _AddScreenState extends State<AddScreen> {
                                                             FontWeight.normal),
                                                   ),
                                                   indexItem ==
-                                                          listItem.indexOf(item)
+                                                          listItem!
+                                                              .indexOf(item)
                                                       ? Icon(
                                                           Icons.check,
                                                           color:
@@ -168,25 +181,56 @@ class _AddScreenState extends State<AddScreen> {
                                   scrollDirection: Axis.vertical,
                                   children: [
                                     ..._searchResult.map((item) {
-                                      return Container(
-                                        padding: EdgeInsets.only(top: 10),
-                                        height: 45,
-                                        child: Column(
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.start,
-                                          children: [
-                                            Text(
-                                              '$item',
-                                              style: TextStyle(
-                                                  color: Colors.black,
-                                                  fontSize: 14,
-                                                  fontWeight:
-                                                      FontWeight.normal),
-                                            ),
-                                            Divider(
-                                              thickness: 2,
-                                            ),
-                                          ],
+                                      return InkWell(
+                                        onTap: () {
+                                          indexItem =
+                                              _searchResult.indexOf(item);
+                                          _mainService.mainModel!.name = item;
+                                          _mainService
+                                              .getTimeZone(item)
+                                              .then((value) {
+                                            _mainService.mainModel!.utcOffset =
+                                                value['utc_offset'];
+                                            setState(() {});
+                                          });
+                                          setState(() {});
+                                        },
+                                        child: Container(
+                                          padding: EdgeInsets.only(top: 10),
+                                          height: 50,
+                                          child: Column(
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.start,
+                                            children: [
+                                              Row(
+                                                mainAxisAlignment:
+                                                    MainAxisAlignment
+                                                        .spaceBetween,
+                                                children: [
+                                                  Text(
+                                                    '$item',
+                                                    style: TextStyle(
+                                                        color: Colors.black,
+                                                        fontSize: 14,
+                                                        fontWeight:
+                                                            FontWeight.normal),
+                                                  ),
+                                                  indexItem ==
+                                                          _searchResult
+                                                              .indexOf(item)
+                                                      ? Icon(
+                                                          Icons.check,
+                                                          color:
+                                                              Color(0xFF7494F6),
+                                                        )
+                                                      : Container()
+                                                ],
+                                              ),
+                                              Divider(
+                                                thickness: 2,
+                                              ),
+                                            ],
+                                          ),
                                         ),
                                       );
                                     })
@@ -204,17 +248,45 @@ class _AddScreenState extends State<AddScreen> {
     );
   }
 
+  getTime(dateTimeString) {
+    if (dateTimeString != '') {
+      print(dateTimeString);
+      var sp = dateTimeString.split('T')[1].split(':');
+      return '${sp[0]}:${sp[1]}';
+    }
+    return '00:00';
+  }
+
+  showLoaderDialog(BuildContext context) {
+    AlertDialog alert = AlertDialog(
+      content: new Row(
+        children: [
+          CircularProgressIndicator(),
+          Container(
+              margin: EdgeInsets.only(left: 7), child: Text("Loading...")),
+        ],
+      ),
+    );
+    showDialog(
+      barrierDismissible: false,
+      context: context,
+      builder: (BuildContext context) {
+        return alert;
+      },
+    );
+  }
+
   onSearchTextChanged(String text) async {
     if (text.isEmpty) {
+      _searchResult = [];
       setState(() {});
       return;
     }
 
-    listItem.forEach((userDetail) {
-      if (userDetail.contains(text) || userDetail.contains(text))
+    listItem!.forEach((userDetail) {
+      if (userDetail.toLowerCase().contains(text.toLowerCase()))
         _searchResult.add(userDetail);
     });
-
     setState(() {});
   }
 }
