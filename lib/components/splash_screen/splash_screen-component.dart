@@ -15,7 +15,7 @@ class SplashScreenState extends State<SplashScreen> {
   }
 
   void navigationPage() {
-    Modular.to.pushNamed('/home');
+    Modular.to.pushNamed('/restore');
   }
 
   @override

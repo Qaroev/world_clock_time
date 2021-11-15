@@ -191,6 +191,8 @@ class _AddScreenState extends State<AddScreen> {
                                               .then((value) {
                                             _mainService.mainModel!.utcOffset =
                                                 value['utc_offset'];
+                                            _mainService.mainModel!.time =
+                                                getTime(value['datetime']);
                                             setState(() {});
                                           });
                                           setState(() {});
@@ -277,16 +279,18 @@ class _AddScreenState extends State<AddScreen> {
   }
 
   onSearchTextChanged(String text) async {
-    if (text.isEmpty) {
+    if (controller.text.isEmpty) {
       _searchResult = [];
       setState(() {});
       return;
     }
-
-    listItem!.forEach((userDetail) {
-      if (userDetail.toLowerCase().contains(text.toLowerCase()))
+    _searchResult = [];
+    for(var i=0;i<listItem!.length;++i){
+      var userDetail=listItem![i];
+      if (userDetail.toLowerCase().contains(controller.text.toLowerCase())){
         _searchResult.add(userDetail);
-    });
-    setState(() {});
+      }
+      setState(() {});
+    }
   }
 }
