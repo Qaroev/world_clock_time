@@ -25,12 +25,13 @@ class _AddScreenState extends State<AddScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Color(_mainService.isDark ? 0xFF202020 : 0xFFFFFFFF),
       body: SafeArea(
         child: SingleChildScrollView(
           child: Column(
             children: [
               Container(
-                padding: EdgeInsets.only(left: 18, right: 18),
+                padding: EdgeInsets.only(left: 18, right: 18, top: 25),
                 child: Column(
                   children: [
                     Row(
@@ -50,7 +51,9 @@ class _AddScreenState extends State<AddScreen> {
                         Text(
                           'Add City',
                           style: TextStyle(
-                            color: Colors.black,
+                            color: _mainService.isDark
+                                ? Colors.white
+                                : Colors.black,
                             fontSize: 17,
                             fontWeight: FontWeight.bold,
                           ),
@@ -81,11 +84,26 @@ class _AddScreenState extends State<AddScreen> {
                             elevation: 0,
                             borderOnForeground: true,
                             child: ListTile(
-                              leading: Icon(Icons.search),
+                              leading: Icon(
+                                Icons.search,
+                                color: _mainService.isDark
+                                    ? Color(0xFF8E8E93)
+                                    : Colors.black,
+                              ),
                               title: TextField(
                                 controller: controller,
+                                style: TextStyle(
+                                    color: _mainService.isDark
+                                        ? Colors.white
+                                        : Colors.black,
+                                    decoration: TextDecoration.none),
                                 decoration: new InputDecoration(
                                     hintText: 'Search',
+                                    hintStyle: TextStyle(
+                                      color: _mainService.isDark
+                                          ? Color(0xFF8E8E93)
+                                          : Colors.black,
+                                    ),
                                     border: InputBorder.none),
                                 onChanged: onSearchTextChanged,
                               ),
@@ -110,7 +128,8 @@ class _AddScreenState extends State<AddScreen> {
                         child: Container(
                           height: MediaQuery.of(context).size.height - 120,
                           padding: EdgeInsets.only(left: 10, right: 10),
-                          color: Color(0xFFEAEAEA),
+                          color: Color(
+                              _mainService.isDark ? 0xFF202020 : 0xFFEAEAEA),
                           child: _searchResult.length == 0 ||
                                   controller.text.isEmpty
                               ? ListView(
@@ -150,7 +169,10 @@ class _AddScreenState extends State<AddScreen> {
                                                   Text(
                                                     '$item',
                                                     style: TextStyle(
-                                                        color: Colors.black,
+                                                        color:
+                                                            _mainService.isDark
+                                                                ? Colors.white
+                                                                : Colors.black,
                                                         fontSize: 14,
                                                         fontWeight:
                                                             FontWeight.normal),
@@ -160,8 +182,9 @@ class _AddScreenState extends State<AddScreen> {
                                                               .indexOf(item)
                                                       ? Icon(
                                                           Icons.check,
-                                                          color:
-                                                              Color(0xFF7494F6),
+                                                          color: Color(int.parse(
+                                                              _mainService
+                                                                  .iconColor)),
                                                         )
                                                       : Container()
                                                 ],
@@ -212,7 +235,10 @@ class _AddScreenState extends State<AddScreen> {
                                                   Text(
                                                     '$item',
                                                     style: TextStyle(
-                                                        color: Colors.black,
+                                                        color:
+                                                            _mainService.isDark
+                                                                ? Colors.white
+                                                                : Colors.black,
                                                         fontSize: 14,
                                                         fontWeight:
                                                             FontWeight.normal),
@@ -222,8 +248,9 @@ class _AddScreenState extends State<AddScreen> {
                                                               .indexOf(item)
                                                       ? Icon(
                                                           Icons.check,
-                                                          color:
-                                                              Color(0xFF7494F6),
+                                                          color: Color(int.parse(
+                                                              _mainService
+                                                                  .iconColor)),
                                                         )
                                                       : Container()
                                                 ],
@@ -285,9 +312,9 @@ class _AddScreenState extends State<AddScreen> {
       return;
     }
     _searchResult = [];
-    for(var i=0;i<listItem!.length;++i){
-      var userDetail=listItem![i];
-      if (userDetail.toLowerCase().contains(controller.text.toLowerCase())){
+    for (var i = 0; i < listItem!.length; ++i) {
+      var userDetail = listItem![i];
+      if (userDetail.toLowerCase().contains(controller.text.toLowerCase())) {
         _searchResult.add(userDetail);
       }
       setState(() {});

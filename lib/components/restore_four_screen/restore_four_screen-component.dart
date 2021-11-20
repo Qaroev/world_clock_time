@@ -135,7 +135,7 @@ class RestoreFourScreenState extends State<RestoreFourScreen> {
                           color: Color(0xFF7494F6),
                         ),
                         child: Center(
-                            child: Text(!isFlag ? 'Next' : 'Continue',
+                            child: Text('Continue',
                                 style: TextStyle(
                                     color: Color(0xFFFFFFFF),
                                     fontSize: 18,

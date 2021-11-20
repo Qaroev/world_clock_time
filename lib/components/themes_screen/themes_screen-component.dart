@@ -2,6 +2,8 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import 'package:worldclocktime/services/token/token_service.dart';
 
 class ThemesScreen extends StatefulWidget {
   @override
@@ -9,6 +11,12 @@ class ThemesScreen extends StatefulWidget {
 }
 
 class ThemesScreenState extends State<ThemesScreen> {
+  TokenService _tokenService = TokenService();
+  bool blueWhite = false;
+  bool greenWhite = false;
+  bool redWhite = false;
+  bool blueDark = false;
+  bool purpleDark = false;
 
   @override
   dispose() {
@@ -18,6 +26,33 @@ class ThemesScreenState extends State<ThemesScreen> {
   @override
   void initState() {
     super.initState();
+    getData();
+  }
+
+  getData() async {
+    Future<SharedPreferences> _prefs = SharedPreferences.getInstance();
+    final SharedPreferences prefs = await _prefs;
+    await prefs.reload();
+    var color = await _prefs.then((value) => prefs.getString('color'));
+    print('color $color');
+    if (color != null) {
+      if (color == '0xFF7494F6') {
+        blueWhite = true;
+      }
+      if (color == '0xFF4FA042') {
+        greenWhite = true;
+      }
+      if (color == '0xFF953E3E') {
+        redWhite = true;
+      }
+      if (color == '0xFF4769CE') {
+        blueDark = true;
+      }
+      if (color == '0xFFA146C2') {
+        purpleDark = true;
+      }
+      setState(() {});
+    }
   }
 
   @override
@@ -52,7 +87,14 @@ class ThemesScreenState extends State<ThemesScreen> {
               ),
               SizedBox(height: 25),
               GestureDetector(
-                onTap: () => Modular.to.pushNamed('/themes-screen'),
+                onTap: () => {
+                  setState(() {
+                    this.blueWhite = !blueWhite;
+                    purpleDark = blueDark = redWhite = greenWhite = false;
+                    _tokenService.removeData('color');
+                    _tokenService.saveData('color', '0xFF7494F6');
+                  })
+                },
                 child: Container(
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(8),
@@ -78,13 +120,18 @@ class ThemesScreenState extends State<ThemesScreen> {
                         color: Colors.white,
                       ),
                       child: Checkbox(
-                        value: true,
+                        value: blueWhite,
+                        side: BorderSide.none,
                         activeColor: Colors.white,
                         checkColor: Color(0xFF7494F6),
                         onChanged: (bool? value) {
-//                         setState(() {
-//                           this.value = value;
-//                         });
+                          setState(() {
+                            this.blueWhite = value!;
+                            purpleDark =
+                                blueDark = redWhite = greenWhite = false;
+                            _tokenService.removeData('color');
+                            _tokenService.saveData('color', '0xFF7494F6');
+                          });
                         },
                       ),
                     ),
@@ -92,154 +139,213 @@ class ThemesScreenState extends State<ThemesScreen> {
                 ),
               ),
               SizedBox(height: 10),
-              Container(
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(8),
-                  color: Color(0xFF4FA042),
-                ),
-                child: ListTile(
-                  contentPadding:
-                      EdgeInsets.only(top: 20, bottom: 20, left: 15, right: 15),
-                  minVerticalPadding: 0,
-                  dense: true,
-                  title: Text(
-                    'GREEN-WHITE',
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 24,
-                      fontWeight: FontWeight.bold,
-                    ),
+              GestureDetector(
+                onTap: () => {
+                  setState(() {
+                    this.greenWhite = !greenWhite;
+                    purpleDark = blueWhite = blueDark = redWhite = false;
+                    _tokenService.removeData('color');
+                    _tokenService.saveData('color', '0xFF4FA042');
+                  })
+                },
+                child: Container(
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(8),
+                    color: Color(0xFF4FA042),
                   ),
-                  trailing: Container(
-                    width: 25,
-                    height: 25,
-                    decoration: BoxDecoration(
-                      color: Colors.white,
+                  child: ListTile(
+                    contentPadding: EdgeInsets.only(
+                        top: 20, bottom: 20, left: 15, right: 15),
+                    minVerticalPadding: 0,
+                    dense: true,
+                    title: Text(
+                      'GREEN-WHITE',
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 24,
+                        fontWeight: FontWeight.bold,
+                      ),
                     ),
-                    child: Checkbox(
-                      value: true,
-                      activeColor: Colors.white,
-                      checkColor: Color(0xFF7494F6),
-                      onChanged: (bool? value) {
-//                         setState(() {
-//                           this.value = value;
-//                         });
-                      },
-                    ),
-                  ),
-                ),
-              ),
-              SizedBox(height: 20),
-              Container(
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(8),
-                  color: Color(0xFF953E3E),
-                ),
-                child: ListTile(
-                  contentPadding:
-                      EdgeInsets.only(top: 20, bottom: 20, left: 15, right: 15),
-                  minVerticalPadding: 0,
-                  dense: true,
-                  title: Text(
-                    'RED-WHITE',
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 24,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                  trailing: Container(
-                    width: 25,
-                    height: 25,
-                    decoration: BoxDecoration(
-                      color: Colors.white,
-                    ),
-                    child: Checkbox(
-                      value: false,
-                      side: BorderSide.none,
-                      activeColor: Colors.white,
-                      checkColor: Color(0xFF7494F6),
-                      onChanged: (bool? value) {
-//                         setState(() {
-//                           this.value = value;
-//                         });
-                      },
+                    trailing: Container(
+                      width: 25,
+                      height: 25,
+                      decoration: BoxDecoration(
+                        color: Colors.white,
+                      ),
+                      child: Checkbox(
+                        value: greenWhite,
+                        side: BorderSide.none,
+                        activeColor: Colors.white,
+                        checkColor: Color(0xFF7494F6),
+                        onChanged: (bool? value) {
+                          setState(() {
+                            this.greenWhite = value!;
+                            purpleDark =
+                                blueWhite = blueDark = redWhite = false;
+                            _tokenService.removeData('color');
+                            _tokenService.saveData('color', '0xFF4FA042');
+                          });
+                        },
+                      ),
                     ),
                   ),
                 ),
               ),
               SizedBox(height: 20),
-              Container(
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(8),
-                  color: Color(0xFF4769CE),
-                ),
-                child: ListTile(
-                  contentPadding:
-                      EdgeInsets.only(top: 20, bottom: 20, left: 15, right: 15),
-                  minVerticalPadding: 0,
-                  dense: true,
-                  title: Text(
-                    'BLUE-DARK',
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 24,
-                      fontWeight: FontWeight.bold,
-                    ),
+              GestureDetector(
+                onTap: () => {
+                  setState(() {
+                    this.redWhite = !redWhite;
+                    purpleDark = greenWhite = blueWhite = blueDark = false;
+                    _tokenService.removeData('color');
+                    _tokenService.saveData('color', '0xFF953E3E');
+                  })
+                },
+                child: Container(
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(8),
+                    color: Color(0xFF953E3E),
                   ),
-                  trailing: Container(
-                    width: 25,
-                    height: 25,
-                    decoration: BoxDecoration(
-                      color: Colors.white,
+                  child: ListTile(
+                    contentPadding: EdgeInsets.only(
+                        top: 20, bottom: 20, left: 15, right: 15),
+                    minVerticalPadding: 0,
+                    dense: true,
+                    title: Text(
+                      'RED-WHITE',
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 24,
+                        fontWeight: FontWeight.bold,
+                      ),
                     ),
-                    child: Checkbox(
-                      value: true,
-                      activeColor: Colors.white,
-                      checkColor: Color(0xFF7494F6),
-                      onChanged: (bool? value) {
-//                         setState(() {
-//                           this.value = value;
-//                         });
-                      },
+                    trailing: Container(
+                      width: 25,
+                      height: 25,
+                      decoration: BoxDecoration(
+                        color: Colors.white,
+                      ),
+                      child: Checkbox(
+                        value: redWhite,
+                        side: BorderSide.none,
+                        activeColor: Colors.white,
+                        checkColor: Color(0xFF7494F6),
+                        onChanged: (bool? value) {
+                          setState(() {
+                            this.redWhite = value!;
+                            purpleDark =
+                                greenWhite = blueWhite = blueDark = false;
+                            _tokenService.removeData('color');
+                            _tokenService.saveData('color', '0xFF953E3E');
+                          });
+                        },
+                      ),
                     ),
                   ),
                 ),
               ),
               SizedBox(height: 20),
-              Container(
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(8),
-                  color: Color(0xFFA146C2),
-                ),
-                child: ListTile(
-                  contentPadding:
-                      EdgeInsets.only(top: 20, bottom: 20, left: 15, right: 15),
-                  minVerticalPadding: 0,
-                  dense: true,
-                  title: Text(
-                    'PURPLE-DARK',
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 24,
-                      fontWeight: FontWeight.bold,
+              GestureDetector(
+                onTap: () => {
+                  setState(() {
+                    this.blueDark = !blueDark;
+                    purpleDark = greenWhite = blueWhite = redWhite = false;
+                    _tokenService.removeData('color');
+                    _tokenService.saveData('color', '0xFF4769CE');
+                  })
+                },
+                child: Container(
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(8),
+                    color: Color(0xFF4769CE),
+                  ),
+                  child: ListTile(
+                    contentPadding: EdgeInsets.only(
+                        top: 20, bottom: 20, left: 15, right: 15),
+                    minVerticalPadding: 0,
+                    dense: true,
+                    title: Text(
+                      'BLUE-DARK',
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 24,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                    trailing: Container(
+                      width: 25,
+                      height: 25,
+                      decoration: BoxDecoration(
+                        color: Colors.white,
+                      ),
+                      child: Checkbox(
+                        value: blueDark,
+                        side: BorderSide.none,
+                        activeColor: Colors.white,
+                        checkColor: Color(0xFF7494F6),
+                        onChanged: (bool? value) {
+                          setState(() {
+                            this.blueDark = value!;
+                            purpleDark =
+                                greenWhite = blueWhite = redWhite = false;
+                            _tokenService.removeData('color');
+                            _tokenService.saveData('color', '0xFF4769CE');
+                          });
+                        },
+                      ),
                     ),
                   ),
-                  trailing: Container(
-                    width: 25,
-                    height: 25,
-                    decoration: BoxDecoration(
-                      color: Colors.white,
+                ),
+              ),
+              SizedBox(height: 20),
+              GestureDetector(
+                onTap: () => {
+                  setState(() {
+                    this.purpleDark = !purpleDark;
+                    blueDark = greenWhite = blueWhite = redWhite = false;
+                    _tokenService.removeData('color');
+                    _tokenService.saveData('color', '0xFFA146C2');
+                  })
+                },
+                child: Container(
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(8),
+                    color: Color(0xFFA146C2),
+                  ),
+                  child: ListTile(
+                    contentPadding: EdgeInsets.only(
+                        top: 20, bottom: 20, left: 15, right: 15),
+                    minVerticalPadding: 0,
+                    dense: true,
+                    title: Text(
+                      'PURPLE-DARK',
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 24,
+                        fontWeight: FontWeight.bold,
+                      ),
                     ),
-                    child: Checkbox(
-                      value: true,
-                      activeColor: Colors.white,
-                      checkColor: Color(0xFF7494F6),
-                      onChanged: (bool? value) {
-//                         setState(() {
-//                           this.value = value;
-//                         });
-                      },
+                    trailing: Container(
+                      width: 25,
+                      height: 25,
+                      decoration: BoxDecoration(
+                        color: Colors.white,
+                      ),
+                      child: Checkbox(
+                        value: purpleDark,
+                        side: BorderSide.none,
+                        activeColor: Colors.white,
+                        checkColor: Color(0xFF7494F6),
+                        onChanged: (bool? value) {
+                          setState(() {
+                            this.purpleDark = value!;
+                            blueDark =
+                                greenWhite = blueWhite = redWhite = false;
+                            _tokenService.removeData('color');
+                            _tokenService.saveData('color', '0xFFA146C2');
+                          });
+                        },
+                      ),
                     ),
                   ),
                 ),

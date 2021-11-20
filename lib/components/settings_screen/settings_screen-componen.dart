@@ -19,7 +19,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   GestureDetector(
-                    onTap: () => Modular.to.pop(),
+                    onTap: () => Modular.to.pushNamed('/home'),
                     child: Icon(
                       Icons.arrow_back_ios,
                       color: Color(0xFF7494F6),

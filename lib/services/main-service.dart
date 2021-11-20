@@ -12,6 +12,8 @@ class MainService extends Disposable {
   TokenService _tokenService = TokenService();
   List<Themes> themes = [];
   MainModel? mainModel = new MainModel();
+  bool isDark = false;
+  dynamic iconColor = '0xFF7494F6';
 
   Future<dynamic> getListTimeZone() async {
     http.Response res =

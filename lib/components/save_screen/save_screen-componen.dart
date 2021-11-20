@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:worldclocktime/services/main-service.dart';
 
 class SaveScreen extends StatefulWidget {
@@ -8,14 +9,34 @@ class SaveScreen extends StatefulWidget {
 }
 
 class _SaveScreenState extends State<SaveScreen> {
+  dynamic iconColor = '0xFF7494F6';
   TextEditingController _controller = new TextEditingController();
 
   MainService _mainService = Modular.get();
   int indexItem = -1;
 
   @override
+  initState() {
+    super.initState();
+    getData();
+  }
+
+  getData() async {
+    Future<SharedPreferences> _prefs = SharedPreferences.getInstance();
+    final SharedPreferences prefs = await _prefs;
+    await prefs.reload();
+    var color = await _prefs.then((value) => prefs.getString('color'));
+    print('color $color');
+    if (color != null) {
+      iconColor = color;
+      setState(() {});
+    }
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Color(_mainService.isDark ? 0xFF202020 : 0xFFFFFFFF),
       body: SafeArea(
         child: Container(
           padding: EdgeInsets.only(left: 18, right: 18, top: 20),
@@ -31,21 +52,19 @@ class _SaveScreenState extends State<SaveScreen> {
                         onTap: () => Modular.to.pop(),
                         child: Icon(
                           Icons.arrow_back_ios,
-                          color: Color(0xFF7494F6),
+                          color: Color(int.parse(iconColor)),
                         ),
                       ),
                       Text(
                         '${_mainService.mainModel!.name ?? ''}',
                         style: TextStyle(
-                          color: Colors.black,
+                          color:
+                              _mainService.isDark ? Colors.white : Colors.black,
                           fontSize: 17,
-                          fontWeight: FontWeight.normal,
+                          fontWeight: FontWeight.bold,
                         ),
                       ),
-                      Icon(
-                        Icons.delete,
-                        color: Color(0xFF7494F6),
-                      ),
+                      Container(),
                     ],
                   ),
                   SizedBox(height: 20),
@@ -62,9 +81,19 @@ class _SaveScreenState extends State<SaveScreen> {
                           borderOnForeground: true,
                           child: ListTile(
                             title: TextFormField(
+                              style: TextStyle(
+                                  color: _mainService.isDark
+                                      ? Colors.white
+                                      : Colors.black,
+                                  decoration: TextDecoration.none),
                               controller: _controller,
                               decoration: new InputDecoration(
                                   hintText: 'Card’s name',
+                                  hintStyle: TextStyle(
+                                    color: _mainService.isDark
+                                        ? Color(0xFF8E8E93)
+                                        : Colors.black,
+                                  ),
                                   border: InputBorder.none),
                               onChanged: (cardName) => setState(() =>
                                   _mainService.mainModel!.cardName = cardName),
@@ -382,10 +411,10 @@ class _SaveScreenState extends State<SaveScreen> {
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(10),
                       color: _mainService.mainModel!.cardName != null &&
-                              _controller.text != ''&&
-                          indexItem != -1
-                          ? Color(0xFF7494F6)
-                          : Color.fromRGBO(116, 148, 246, 0.3),
+                              _controller.text != '' &&
+                              indexItem != -1
+                          ? Color(int.parse(iconColor))
+                          : Color(int.parse(iconColor)).withOpacity(0.3),
                     ),
                     child: Center(
                         child: Text('Save',

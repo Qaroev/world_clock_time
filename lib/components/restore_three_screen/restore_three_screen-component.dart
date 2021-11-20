@@ -116,7 +116,7 @@ class RestoreThreeScreenState extends State<RestoreThreeScreen> {
                       color: Color(0xFF7494F6),
                     ),
                     child: Center(
-                        child: Text('Next',
+                        child: Text('Continue',
                             style: TextStyle(
                                 color: Color(0xFFFFFFFF),
                                 fontSize: 18,
