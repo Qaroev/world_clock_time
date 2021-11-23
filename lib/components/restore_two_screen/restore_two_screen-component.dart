@@ -123,118 +123,120 @@ class RestoreTwoScreenState extends State<RestoreTwoScreen> {
     return Scaffold(
       backgroundColor: Color(0xFFFFFFFF),
       body: Center(
-        child: Padding(
-          padding: const EdgeInsets.only(left: 18.0, right: 18, top: 0),
-          child: SingleChildScrollView(
-            child: Column(
-              children: <Widget>[
-                Container(
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(10),
-                    color: Color(0xFFFFFFFF),
-                    boxShadow: <BoxShadow>[
-                      BoxShadow(
-                        color: Color.fromRGBO(142, 156, 182, 0.28),
-                        blurRadius: 2,
-                        offset: Offset(4, 8),
-                      ),
-                    ],
-                  ),
-                  padding:
-                      EdgeInsets.only(left: 20, right: 20, top: 20, bottom: 20),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Row(
-                        children: [
-                          Image.asset('assets/person.png'),
-                          SizedBox(
-                            width: 12,
-                          ),
-                          Row(
-                            children: [
-                              Image.asset('assets/star.png'),
-                              Image.asset('assets/star.png'),
-                              Image.asset('assets/star.png'),
-                              Image.asset('assets/star.png'),
-                              Image.asset('assets/star.png'),
-                            ],
-                          )
-                        ],
-                      ),
-                      SizedBox(
-                        height: 12,
-                      ),
-                      Container(
-                        width: 295,
-                        child: Text(
-                          'Without a doubt, this is a tool that performs just exactly what you require of it.',
-                          style: TextStyle(
-                              color: Color(0xFF909090),
-                              fontSize: 16,
-                              fontWeight: FontWeight.normal),
-                          textAlign: TextAlign.start,
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: <Widget>[
+            Container(),
+            Padding(
+              padding:
+                  EdgeInsets.only(left: 20, right: 20),
+              child: Column(
+                children: [
+                  Container(
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(10),
+                      color: Color(0xFFFFFFFF),
+                      boxShadow: <BoxShadow>[
+                        BoxShadow(
+                          color: Color.fromRGBO(142, 156, 182, 0.28),
+                          blurRadius: 2,
+                          offset: Offset(4, 8),
                         ),
-                      )
-                    ],
-                  ),
-                ),
-                SizedBox(
-                  height: 12,
-                ),
-                Container(
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(10),
-                    color: Color(0xFFFFFFFF),
-                    boxShadow: <BoxShadow>[
-                      BoxShadow(
-                        color: Color.fromRGBO(142, 156, 182, 0.28),
-                        blurRadius: 2,
-                        offset: Offset(4, 8),
-                      ),
-                    ],
-                  ),
-                  padding:
-                      EdgeInsets.only(left: 20, right: 20, top: 20, bottom: 20),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Row(
-                        children: [
-                          Image.asset('assets/person2.png'),
-                          SizedBox(
-                            width: 12,
-                          ),
-                          Row(
-                            children: [
-                              Image.asset('assets/star.png'),
-                              Image.asset('assets/star.png'),
-                              Image.asset('assets/star.png'),
-                              Image.asset('assets/star.png'),
-                              Image.asset('assets/star.png'),
-                            ],
-                          )
-                        ],
-                      ),
-                      SizedBox(
-                        height: 12,
-                      ),
-                      Container(
-                        child: Text(
-                          'The compact design allows me to see time zones for all the countries I work with',
-                          style: TextStyle(
-                              color: Color(0xFF909090),
-                              fontSize: 16,
-                              fontWeight: FontWeight.normal),
-                          textAlign: TextAlign.start,
+                      ],
+                    ),
+                    padding: EdgeInsets.only(
+                        left: 20, right: 20, top: 20, bottom: 20),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Row(
+                          children: [
+                            Image.asset('assets/person2.png'),
+                            SizedBox(
+                              width: 12,
+                            ),
+                            Row(
+                              children: [
+                                Image.asset('assets/star.png'),
+                                Image.asset('assets/star.png'),
+                                Image.asset('assets/star.png'),
+                                Image.asset('assets/star.png'),
+                                Image.asset('assets/star.png'),
+                              ],
+                            )
+                          ],
                         ),
-                      )
-                    ],
+                        SizedBox(
+                          height: 12,
+                        ),
+                        Container(
+                          child: Text(
+                            'The compact design allows me to see time zones for all the countries I work with',
+                            style: TextStyle(
+                                color: Color(0xFF909090),
+                                fontSize: 16,
+                                fontWeight: FontWeight.normal),
+                            textAlign: TextAlign.start,
+                          ),
+                        )
+                      ],
+                    ),
                   ),
-                ),
-                SizedBox(
-                  height: 70,
-                ),
+                  SizedBox(height: 12),
+                  Container(
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(10),
+                      color: Color(0xFFFFFFFF),
+                      boxShadow: <BoxShadow>[
+                        BoxShadow(
+                          color: Color.fromRGBO(142, 156, 182, 0.28),
+                          blurRadius: 2,
+                          offset: Offset(4, 8),
+                        ),
+                      ],
+                    ),
+                    padding: EdgeInsets.only(
+                        left: 20, right: 20, top: 20, bottom: 20),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        Row(
+                          children: [
+                            Image.asset('assets/person.png'),
+                            SizedBox(
+                              width: 12,
+                            ),
+                            Row(
+                              children: [
+                                Image.asset('assets/star.png'),
+                                Image.asset('assets/star.png'),
+                                Image.asset('assets/star.png'),
+                                Image.asset('assets/star.png'),
+                                Image.asset('assets/star.png'),
+                              ],
+                            )
+                          ],
+                        ),
+                        Container(
+                          width: 295,
+                          child: Text(
+                            'Without a doubt, this is a tool that performs just exactly what you require of it.',
+                            style: TextStyle(
+                                color: Color(0xFF909090),
+                                fontSize: 16,
+                                fontWeight: FontWeight.normal),
+                            textAlign: TextAlign.start,
+                          ),
+                        )
+                      ],
+                    ),
+                  ),
+                ],
+              ),
+            ),
+            Column(
+              children: [
                 Container(
                   child: Text(
                     "Help us to improve the app",
@@ -259,9 +261,10 @@ class RestoreTwoScreenState extends State<RestoreTwoScreen> {
                     textAlign: TextAlign.center,
                   ),
                 ),
-                SizedBox(
-                  height: 61,
-                ),
+              ],
+            ),
+            Column(
+              children: [
                 Container(
                   width: 50,
                   child: Row(
@@ -313,7 +316,7 @@ class RestoreTwoScreenState extends State<RestoreTwoScreen> {
                         isFlag = true;
                       });
                     } else {
-                       Modular.to.pushNamed('/restore-three');
+                      Modular.to.pushNamed('/restore-three');
                     }
                   },
                   child: Container(
@@ -331,12 +334,10 @@ class RestoreTwoScreenState extends State<RestoreTwoScreen> {
                                 fontWeight: FontWeight.normal))),
                   ),
                 ),
-                SizedBox(
-                  height: 20,
-                ),
               ],
             ),
-          ),
+            Container()
+          ],
         ),
       ),
     );

@@ -22,20 +22,18 @@ class RestoreThreeScreenState extends State<RestoreThreeScreen> {
     return Scaffold(
       backgroundColor: Color(0xFFFFFFFF),
       body: Center(
-        child: Padding(
-          padding: const EdgeInsets.only(left: 18.0, right: 18),
-          child: SingleChildScrollView(
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              children: <Widget>[
-                new Image.asset(
-                  'assets/Vector.png',
-                  fit: BoxFit.cover,
-                  width: 210,
-                ),
-                SizedBox(
-                  height: 50,
-                ),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          mainAxisSize: MainAxisSize.max,
+          children: <Widget>[
+            Container(),
+            new Image.asset(
+              'assets/Vector.png',
+              fit: BoxFit.cover,
+              width: 210,
+            ),
+            Column(
+              children: [
                 Container(
                   child: Text(
                     "Let the world clock always  be with you",
@@ -60,9 +58,10 @@ class RestoreThreeScreenState extends State<RestoreThreeScreen> {
                     textAlign: TextAlign.center,
                   ),
                 ),
-                SizedBox(
-                  height: 61,
-                ),
+              ],
+            ),
+            Column(
+              children: [
                 Container(
                   width: 50,
                   child: Row(
@@ -123,12 +122,10 @@ class RestoreThreeScreenState extends State<RestoreThreeScreen> {
                                 fontWeight: FontWeight.normal))),
                   ),
                 ),
-                SizedBox(
-                  height: 20,
-                ),
               ],
             ),
-          ),
+            Container()
+          ],
         ),
       ),
     );
